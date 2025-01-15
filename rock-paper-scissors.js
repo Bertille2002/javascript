@@ -1,20 +1,21 @@
-document.querySelectorAll('.rps-button').forEach(button => {
-    button.addEventListener('click', function() {
-        const choices = ['Rock', 'Paper', 'Scissors'];
-        const userChoice = this.textContent;
+const result = document.querySelector('#result');
+
+document.querySelectorAll('.choices button').forEach(button => {
+    button.addEventListener('click', () => {
+        const userChoice = button.value;
+        const choices = ['rock', 'paper', 'scissors'];
         const computerChoice = choices[Math.floor(Math.random() * choices.length)];
-        let result = '';
+
         if (userChoice === computerChoice) {
-            result = 'It\'s a tie!';
+            result.textContent = `It's a tie! Both chose ${userChoice}.`;
         } else if (
-            (userChoice === 'Rock' && computerChoice === 'Scissors') ||
-            (userChoice === 'Paper' && computerChoice === 'Rock') ||
-            (userChoice === 'Scissors' && computerChoice === 'Paper')
+            (userChoice === 'rock' && computerChoice === 'scissors') ||
+            (userChoice === 'paper' && computerChoice === 'rock') ||
+            (userChoice === 'scissors' && computerChoice === 'paper')
         ) {
-            result = 'You win!';
+            result.textContent = `You win! ${userChoice} beats ${computerChoice}.`;
         } else {
-            result = 'You lose!';
+            result.textContent = `You lose! ${computerChoice} beats ${userChoice}.`;
         }
-        document.querySelector('#result').textContent = `You chose ${userChoice}, computer chose ${computerChoice}. ${result}`;
     });
 });
